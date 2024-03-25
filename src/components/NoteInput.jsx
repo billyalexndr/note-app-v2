@@ -1,4 +1,5 @@
 import React from "react";
+import { addNote } from "../utils/local-data";
 
 class NoteInput extends React.Component {
     constructor(props) {
@@ -24,22 +25,20 @@ class NoteInput extends React.Component {
         }
     }
 
-    onBodyChangeEventHandler() {
-        this.setState(() => {
-            return {
-                body: event.target.value,
-            };
+    onBodyChangeEventHandler(e) {
+        this.setState({
+            body: e.target.value,
         });
     }
 
-    onSubmitEventHandler = (e) => {
+    onSubmitEventHandler(e) {
         e.preventDefault();
-        this.props.addNote({
+        addNote({
             title: this.state.title,
             body: this.state.body,
         });
         this.setState({ title: "", body: "" });
-    };
+    }
 
     render() {
         const remainingChars =
