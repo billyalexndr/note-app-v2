@@ -1,5 +1,6 @@
 import React from "react";
 import { addNote } from "../utils/local-data";
+import PropTypes from 'prop-types';
 
 class NoteInput extends React.Component {
     constructor(props) {
@@ -57,6 +58,7 @@ class NoteInput extends React.Component {
                         placeholder="Masukkan judul note..."
                         value={this.state.title}
                         onChange={this.onTitleChangeEventHandler}
+                        required
                     />
                     <textarea
                         name="body"
@@ -64,12 +66,17 @@ class NoteInput extends React.Component {
                         value={this.state.body}
                         rows="5"
                         onChange={this.onBodyChangeEventHandler}
+                        required
                     />
                     <button type="submit">Add Note</button>
                 </form>
             </div>
         );
     }
+}
+
+NoteInput.propTypes = {
+ addNote: PropTypes.func,
 }
 
 export default NoteInput;

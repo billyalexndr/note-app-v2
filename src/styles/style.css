@@ -29,20 +29,15 @@ textarea::placeholder {
 
 .note-app__header {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between; 
+    align-items: center; 
     padding: 4px 16px;
     border-bottom: 1px solid #aaa;
 }
 
 .note-app__header h1 {
-    margin: 8px 0;
-    flex: 1;
+    margin: 0;
     color: white;
-}
-
-.note-app__header input[type="text"] {
-    width: 300px;
 }
 
 .note-app__body {
@@ -56,14 +51,15 @@ textarea::placeholder {
     margin: 16px 0;
 }
 
-.note-input {
+.note-input, .search-bar {
     margin: 0 auto;
     max-width: 500px;
     margin-bottom: 48px;
 }
 
 .note-input input,
-.note-input textarea {
+.note-input textarea,
+.search-bar {
     display: block;
     width: 100%;
 }
@@ -125,6 +121,7 @@ textarea::placeholder {
 }
 
 .note-item__title {
+    color: white;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -180,6 +177,35 @@ textarea::placeholder {
     color: white;
     text-align: center;
     margin-top: 50px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+    flex: 1; /* Membuat navigasi menempati sisa ruang yang tersedia */
+}
+
+.navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Mengatur agar menu navigasi menjadi inline */
+}
+
+.navbar li {
+    margin-right: 1rem;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.navbar a:hover {
+    background-color: #555;
 }
 
 

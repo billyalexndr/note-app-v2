@@ -31,7 +31,6 @@ class HomePage extends React.Component {
         keyword,
       }
     });
- 
     this.props.keywordChange(keyword);
   }
 
@@ -49,12 +48,6 @@ class HomePage extends React.Component {
     });
   };
 
-  // handleSearchChange = (keyword) => {
-  //   this.setState({
-  //     keyword,
-  //   });
-  // };
-
   render() {
     const { notes, keyword } = this.state;
 
@@ -69,12 +62,12 @@ class HomePage extends React.Component {
         <div className="note-app__header">
           <h1>Notes</h1>
           <Navigation />
+        </div>
+        <div className="note-app__body">
           <SearchBar
             keyword={keyword}
             keywordChange={this.onKeywordChangeHandler}
           />
-        </div>
-        <div className="note-app__body">
           <h2>Catatan Aktif</h2>
           <NoteList
             notes={filteredActiveNotes}

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 const ArchiveButton = ({ archived, onArchive }) => {
     return (
@@ -14,5 +15,11 @@ const ArchiveButton = ({ archived, onArchive }) => {
         </>
     );
 };
+
+ArchiveButton.propTypes = {
+    archived: PropTypes.bool,
+    onArchive: PropTypes.func
+};
+
 
 export default ArchiveButton;

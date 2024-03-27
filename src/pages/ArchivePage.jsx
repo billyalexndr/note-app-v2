@@ -6,14 +6,13 @@ import Navigation from "../components/Navigation";
 import SearchBarWrapper from "../components/SearchBar";
 
 function ArchivePageWrapper() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const keyword = searchParams.get('keyword');
-  function changeSearchParams(keyword) {
-    setSearchParams({ keyword });
-  }
-  return <ArchivePage defaultKeyword={keyword} keywordChange={changeSearchParams} />
+    const [searchParams, setSearchParams] = useSearchParams();
+    const keyword = searchParams.get('keyword');
+    function changeSearchParams(keyword) {
+        setSearchParams({ keyword });
+    }
+    return <ArchivePage defaultKeyword={keyword} keywordChange={changeSearchParams} />
 }
-
 
 class ArchivePage extends React.Component {
     constructor(props) {
@@ -25,15 +24,14 @@ class ArchivePage extends React.Component {
         this.onKeywordChangeHandler = this.onKeywordChangeHandler.bind(this);
     }
 
-      onKeywordChangeHandler(keyword) {
-    this.setState(() => {
-      return {
-        keyword,
-      }
-    });
- 
-    this.props.keywordChange(keyword);
-  }
+    onKeywordChangeHandler(keyword) {
+        this.setState(() => {
+            return {
+                keyword,
+            }
+        });
+        this.props.keywordChange(keyword);
+    }
 
     handleDeleteNote = (id) => {
         deleteNote(id);
@@ -51,12 +49,6 @@ class ArchivePage extends React.Component {
         }));
     };
 
-    // handleSearchChange = (e) => {
-    //     this.setState({
-    //         keyword: e.target.value,
-    //     });
-    // };
-
     render() {
         const { archivedNotes, keyword } = this.state;
 
@@ -71,12 +63,12 @@ class ArchivePage extends React.Component {
                 <div className="note-app__header">
                     <h1>Notes</h1>
                     <Navigation />
-                    <SearchBarWrapper
-                        keyword={keyword}
-            keywordChange={this.onKeywordChangeHandler}
-                    />
                 </div>
                 <div className="note-app__body">
+                    <SearchBarWrapper
+                        keyword={keyword}
+                        keywordChange={this.onKeywordChangeHandler}
+                    />
                     <h2>Arsip</h2>
                     <NoteList
                         notes={filteredArchivedNotes}
