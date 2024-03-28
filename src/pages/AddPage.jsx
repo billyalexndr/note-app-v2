@@ -7,7 +7,6 @@ import { addNote } from "../utils/local-data"
 function AddPage() {
     const navigate = useNavigate();
 
-    // error
     function onAddNoteHandler(note) {
         addNote(note)
         navigate('/');
@@ -20,7 +19,7 @@ function AddPage() {
                 <Navigation />
             </div>
             <div className="note-app__body">
-                <NoteInput onAddNote={onAddNoteHandler} />
+                <NoteInput addNote={onAddNoteHandler} />
             </div>
         </>
     )

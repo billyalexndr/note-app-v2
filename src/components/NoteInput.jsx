@@ -1,5 +1,4 @@
 import React from "react";
-import { addNote } from "../utils/local-data";
 import PropTypes from 'prop-types';
 
 class NoteInput extends React.Component {
@@ -17,24 +16,28 @@ class NoteInput extends React.Component {
         this.onSubmitEventHandler = this.onSubmitEventHandler.bind(this);
     }
 
-    onTitleChangeEventHandler(e) {
-        const title = e.target.value;
+    onTitleChangeEventHandler(event) {
+        const title = event.target.value;
         if (title.length <= this.state.titleMaxLength) {
-            this.setState({
-                title: title,
+            this.setState(() => {
+                return {
+                title: title
+                };
             });
         }
     }
 
     onBodyChangeEventHandler(e) {
-        this.setState({
-            body: e.target.value,
+        this.setState(() => {
+            return {
+                body: e.target.value,
+            };
         });
     }
 
     onSubmitEventHandler(e) {
         e.preventDefault();
-        addNote({
+        this.props.addNote({
             title: this.state.title,
             body: this.state.body,
         });
@@ -76,7 +79,7 @@ class NoteInput extends React.Component {
 }
 
 NoteInput.propTypes = {
- addNote: PropTypes.func,
+ addNote: PropTypes.func.isRequired,
 }
 
 export default NoteInput;
