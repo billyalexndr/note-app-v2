@@ -1,5 +1,6 @@
 import React from "react";
-import { getActiveNotes, getArchivedNotes, addNote, deleteNote, archiveNote, unarchiveNote } from "../utils/local-data";
+import PropTypes from "prop-types";
+import { getActiveNotes, getArchivedNotes, deleteNote, unarchiveNote } from "../utils/local-data";
 import { useSearchParams } from 'react-router-dom';
 import NoteList from "../components/NoteList";
 import Navigation from "../components/Navigation";
@@ -80,5 +81,10 @@ class ArchivePage extends React.Component {
         );
     }
 }
+
+ArchivePageWrapper.propTypes = {
+  defaultKeyword: PropTypes.string,
+  keywordChange: PropTypes.func
+};
 
 export default ArchivePageWrapper;

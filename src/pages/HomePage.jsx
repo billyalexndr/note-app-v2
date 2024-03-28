@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { getActiveNotes, archiveNote, deleteNote } from "../utils/local-data";
 import { useSearchParams } from 'react-router-dom';
 import NoteList from "../components/NoteList";
@@ -79,5 +80,10 @@ class HomePage extends React.Component {
     );
   }
 }
+
+HomePageWrapper.propTypes = {
+  defaultKeyword: PropTypes.string,
+  keywordChange: PropTypes.func
+};
 
 export default HomePageWrapper;

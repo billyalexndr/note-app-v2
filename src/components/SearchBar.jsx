@@ -13,7 +13,7 @@ const SearchBar = ({ keyword, keywordChange }) => {
   );
 };
 
-SearchBar.propType = {
+SearchBar.propTypes = {
   keyword: PropTypes.string.isRequired,
   keywordChange: PropTypes.func.isRequired
 }
