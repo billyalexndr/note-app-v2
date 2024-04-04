@@ -1,13 +1,14 @@
 import React from "react";
 import NoteItem from "./NoteItem";
 import PropTypes from 'prop-types';
+import { useLocale } from "../context/LocaleContext";
 
 const NoteList = ({ notes, onDeleteNote, onArchiveNote, onUnarchiveNote }) => {
-    console.log(notes);
+    const { theme, language } = useLocale();
     return (
         <>
             {notes.length === 0 ? (
-                <p className="notes-list__empty-message">No notes available.</p>
+                <p className="notes-list__empty-message">{language === 'en' ? "No notes available." : "Tidak ada catatan tersedia."}</p>
             ) : (
                 <div className="notes-list">
                     {notes.map((note) => (

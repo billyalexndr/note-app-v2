@@ -1,28 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Navigation from "../components/Navigation";
-import { getNote } from "../utils/local-data";
+import { getNote } from "../utils/api";
 import { showFormattedDate } from "../utils/index";
 import NotFoundPage from "./NotFoundPage";
+import Loading from "../components/Loading";
 
 const DetailPage = () => {
     const { id } = useParams();
-    const note = getNote(id);
+    const [note, setNote] = useState(null);
+    const [loading, setLoading] = useState(true); 
+
+    useEffect(() => {
+        const fetchNote = async () => {
+            try {
+                const fetchedNote = await getNote(id);
+                setNote(fetchedNote);
+                setLoading(false); 
+            } catch (error) {
+                setLoading(false); 
+            }
+        };
+
+        fetchNote();
+    }, [id]);
+    
+    if (loading) {
+        return <Loading />; 
+    }
 
     if (!note) {
-        return <NotFoundPage />
+        return <NotFoundPage />;
     }
 
     return (
         <div className="note-app">
-            <div className="note-app__header">
-                <h1>Notes</h1>
-                <Navigation />
-            </div>
             <div className="note-app__body">
-                <h2>{note.title}</h2>
-                <p>{showFormattedDate(note.createdAt)}</p>
-                <p>{note.body}</p>
+                <>
+                    <h2>{note.data.title}</h2>
+                    <p>{showFormattedDate(note.data.createdAt)}</p>
+                    <p>{note.data.body}</p>
+                </>
             </div>
         </div>
     );

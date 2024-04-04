@@ -1,81 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from 'prop-types';
+import { useLocale } from "../context/LocaleContext";
 
-class NoteInput extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            title: "",
-            body: "",
-            titleMaxLength: 50,
-        };
-        this.onTitleChangeEventHandler =
-            this.onTitleChangeEventHandler.bind(this);
-        this.onBodyChangeEventHandler =
-            this.onBodyChangeEventHandler.bind(this);
-        this.onSubmitEventHandler = this.onSubmitEventHandler.bind(this);
-    }
+const NoteInput = ({ addNote }) => {
+    const [title, setTitle] = useState("");
+    const [body, setBody] = useState("");
+    const titleMaxLength = 50;
+    const { theme, language } = useLocale();
 
-    onTitleChangeEventHandler(event) {
-        const title = event.target.value;
-        if (title.length <= this.state.titleMaxLength) {
-            this.setState(() => {
-                return {
-                title: title
-                };
-            });
+    const onTitleChangeHandler = (event) => {
+        const newTitle = event.target.value;
+        if (newTitle.length <= titleMaxLength) {
+            setTitle(newTitle);
         }
-    }
+    };
 
-    onBodyChangeEventHandler(e) {
-        this.setState(() => {
-            return {
-                body: e.target.value,
-            };
+    const onBodyChangeHandler = (event) => {
+        setBody(event.target.value);
+    };
+
+    const onSubmitHandler = (event) => {
+        event.preventDefault();
+        addNote({
+            title: title,
+            body: body,
         });
-    }
+        setTitle("");
+        setBody("");
+    };
 
-    onSubmitEventHandler(e) {
-        e.preventDefault();
-        this.props.addNote({
-            title: this.state.title,
-            body: this.state.body,
-        });
-        this.setState({ title: "", body: "" });
-    }
+    const remainingChars = titleMaxLength - title.length;
 
-    render() {
-        const remainingChars =
-            this.state.titleMaxLength - this.state.title.length;
-
-        return (
-            <div className="note-input">
-                <h2>Buat Catatan</h2>
-                <p className="note-input__title__char-limit">
-                    Sisa Karakter: {remainingChars}
-                </p>
-                <form onSubmit={this.onSubmitEventHandler}>
-                    <input
-                        type="text"
-                        name="title"
-                        placeholder="Masukkan judul note..."
-                        value={this.state.title}
-                        onChange={this.onTitleChangeEventHandler}
-                        required
-                    />
-                    <textarea
-                        name="body"
-                        placeholder="Tuliskan catatanmu disini..."
-                        value={this.state.body}
-                        rows="5"
-                        onChange={this.onBodyChangeEventHandler}
-                        required
-                    />
-                    <button type="submit">Add Note</button>
-                </form>
-            </div>
-        );
-    }
+    return (
+        <div className="note-input">
+            <h2>{language === 'en' ? 'Add Note' : 'Buat Catatan'}</h2>
+            <p className="note-input__title__char-limit">
+                {language === 'en' ? 'Remain Character' : 'Sisa Karakter'}: {remainingChars}
+            </p>
+            <form onSubmit={onSubmitHandler}>
+                <input
+                    type="text"
+                    name="title"
+                    placeholder={language === 'en' ? "Input note's title..." : "Masukkan judul note..."}
+                    value={title}
+                    onChange={onTitleChangeHandler}
+                    required
+                />
+                <textarea
+                    name="body"
+                    placeholder={language === 'en' ? "Write your note here...." : "Tuliskan catatanmu disini..."}
+                    value={body}
+                    rows="5"
+                    onChange={onBodyChangeHandler}
+                    required
+                />
+                <button type="submit">{language === 'en' ? "Add note" : "Tambahkan catatan"}</button>
+            </form>
+        </div>
+    );
 }
 
 NoteInput.propTypes = {

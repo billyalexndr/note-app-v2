@@ -1,89 +1,90 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { getActiveNotes, archiveNote, deleteNote } from "../utils/local-data";
+import { getActiveNotes, archiveNote, deleteNote } from "../utils/api";
 import { useSearchParams } from 'react-router-dom';
 import NoteList from "../components/NoteList";
-import Navigation from "../components/Navigation";
 import SearchBar from "../components/SearchBar";
+import { useLocale } from "../context/LocaleContext";
+import Loading from "../components/Loading"; 
 
-function HomePageWrapper() {
+const HomePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const keyword = searchParams.get('keyword');
-  function changeSearchParams(keyword) {
+  const [notes, setNotes] = useState([]); 
+  const [keyword, setKeyword] = useState(searchParams.get('keyword') || '');
+  const [loading, setLoading] = useState(true); 
+  const { theme, language } = useLocale();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data, error } = await getActiveNotes();
+        if (!error) {
+          setNotes(data);
+        } else {
+          console.error("Error fetching active notes");
+        }
+      } catch (error) {
+        console.error("Error fetching active notes:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []); 
+
+  const onKeywordChangeHandler = (keyword) => {
+    setKeyword(keyword);
     setSearchParams({ keyword });
   }
-  return <HomePage defaultKeyword={keyword} keywordChange={changeSearchParams} />
-}
 
-class HomePage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      notes: getActiveNotes(),
-      keyword: props.defaultKeyword || '',
-    };
-
-    this.onKeywordChangeHandler = this.onKeywordChangeHandler.bind(this);
-  }
-
-  onKeywordChangeHandler(keyword) {
-    this.setState(() => {
-      return {
-        keyword,
-      }
-    });
-    this.props.keywordChange(keyword);
-  }
-
-  handleDeleteNote = (id) => {
-    deleteNote(id);
-    this.setState({
-      notes: getActiveNotes(),
-    });
+  const handleDeleteNote = async (id) => {
+    const { error } = await deleteNote(id);
+    if (!error) {
+      setNotes(notes.filter((note) => note.id !== id));
+    } else {
+      console.error("Error deleting note");
+    }
   };
 
-  handleArchiveNote = (id) => {
-    archiveNote(id);
-    this.setState({
-      notes: getActiveNotes(),
-    });
+  const handleArchiveNote = async (id) => {
+    const { error } = await archiveNote(id);
+    if (!error) {
+      setNotes(
+        notes.map((note) =>
+          note.id === id ? { ...note, archived: true } : note
+        )
+      );
+    } else {
+      console.error("Error archiving note");
+    }
   };
 
-  render() {
-    const { notes, keyword } = this.state;
+  const filteredActiveNotes = notes.filter(
+    (note) =>
+      !note.archived &&
+      note.title.toLowerCase().includes(keyword.toLowerCase())
+  );
 
-    const filteredActiveNotes = notes.filter(
-      (note) =>
-        !note.archived &&
-        note.title.toLowerCase().includes(keyword.toLowerCase())
-    );
+  if (loading) {
+    return <Loading />; 
+  }
 
-    return (
-      <div className="note-app">
-        <div className="note-app__header">
-          <h1>Notes</h1>
-          <Navigation />
-        </div>
-        <div className="note-app__body">
-          <SearchBar
-            keyword={keyword}
-            keywordChange={this.onKeywordChangeHandler}
-          />
-          <h2>Catatan Aktif</h2>
-          <NoteList
-            notes={filteredActiveNotes}
-            onDeleteNote={this.handleDeleteNote}
-            onArchiveNote={this.handleArchiveNote}
-          />
-        </div>
+  return (
+    <div className="note-app">
+      <div className="note-app__body">
+        <SearchBar
+          keyword={keyword}
+          keywordChange={onKeywordChangeHandler}
+        />
+        <h2>{language === 'en' ? 'Active Notes' : 'Catatan Aktif'}</h2>
+        <NoteList
+          notes={filteredActiveNotes}
+          onDeleteNote={handleDeleteNote}
+          onArchiveNote={handleArchiveNote}
+        />
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-HomePageWrapper.propTypes = {
-  defaultKeyword: PropTypes.string,
-  keywordChange: PropTypes.func
-};
-
-export default HomePageWrapper;
+export default HomePage;

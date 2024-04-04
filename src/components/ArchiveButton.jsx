@@ -1,7 +1,10 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import { useLocale } from "../context/LocaleContext";
 
 const ArchiveButton = ({ archived, onArchive }) => {
+    const { theme, language } = useLocale();
+
     return (
         <>
             {!archived && (
@@ -9,7 +12,7 @@ const ArchiveButton = ({ archived, onArchive }) => {
                     className="note-item__archive-button"
                     onClick={onArchive}
                 >
-                    Archive
+                    {language === 'en' ? "Archive" : "Arsip"}
                 </button>
             )}
         </>

@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import { useLocale } from "../context/LocaleContext";
 
 const UnarchiveButton = ({ onUnarchive }) => {
+    const { theme, language } = useLocale();
     return (
         <button className="note-item__archive-button" onClick={onUnarchive}>
-            Unarchive
+            {language === 'en' ? "Unarchive" : "Buka Arsip"}
         </button>
     );
 };
