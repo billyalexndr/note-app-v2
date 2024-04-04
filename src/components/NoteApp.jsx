@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import HomePage from "../pages/HomePage";
 import DetailPage from "../pages/DetailPage";
 import NotFoundPage from "../pages/NotFoundPage";
@@ -9,6 +9,7 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import { getUserLogged, putAccessToken } from "../utils/api";
 import { useLocale } from "../context/LocaleContext";
+import Navigation from "./Navigation"
 
 const NoteApp = () => {
     const [authedUser, setAuthedUser] = useState(null)
