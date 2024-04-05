@@ -45,7 +45,9 @@ const Navigation = ({ logout, isLoggedIn, name }) => {
                     </li>
                     {isLoggedIn ? (
                         <li>
-                            <button onClick={handleLogout}>{name}<FiLogOut /></button>
+                            <button className="logout" onClick={handleLogout}>
+                                {name} <span><FiLogOut /></span>
+                            </button>
                         </li>
                     ) : null}
                 </div>

@@ -143,6 +143,10 @@ textarea::placeholder {
     font-weight: bold;
 }
 
+.logout span {
+    margin-left: 2px; 
+}
+
 .register-page {
     width: 500px;
     margin: 0 auto;
@@ -233,7 +237,7 @@ textarea::placeholder {
 
 .note-app__body {
     max-width: 1000px;
-    margin: 16px auto;
+    margin: 0px auto;
     padding: 12px;
     height: 100vh;
 }
@@ -247,6 +251,7 @@ textarea::placeholder {
     margin: 0 auto;
     max-width: 500px;
     margin-bottom: 48px;
+    margin-top: 16px;
 }
 
 .note-input input,
@@ -375,7 +380,7 @@ textarea::placeholder {
     display: flex;
     justify-content: center; 
     align-items: center; 
-    padding: 10px 20px; 
+    padding: 10px 20px;
 }
 
 .navbar ul {
