@@ -34,19 +34,21 @@ const Navigation = ({ logout, isLoggedIn, name }) => {
                 <li>
                     <Link to="/add-note">{language === 'en' ? 'Add Note' : 'Tambah Catatan'}</Link>
                 </li>
-                {isLoggedIn ? (
+                <div className="right">
                     <li>
-                        <button onClick={handleLogout}>{name}<FiLogOut /></button>
+                        <button onClick={handleToggleLanguage}>
+                            {language === 'en' ? 'id' : 'en'}
+                        </button>
                     </li>
-                ) : null}
-                <li>
-                    <button onClick={handleToggleLanguage}>
-                        {language === 'en' ? 'id' : 'en'}
-                    </button>
-                </li>
-                <li>
-                    <button onClick={handleToggleTheme}>{ theme === 'light' ? <FaMoon /> : <FaSun /> }</button>
-                </li>
+                    <li>
+                        <button onClick={handleToggleTheme}>{ theme === 'light' ? <FaMoon /> : <FaSun /> }</button>
+                    </li>
+                    {isLoggedIn ? (
+                        <li>
+                            <button onClick={handleLogout}>{name}<FiLogOut /></button>
+                        </li>
+                    ) : null}
+                </div>
             </ul>
         </nav>
     );

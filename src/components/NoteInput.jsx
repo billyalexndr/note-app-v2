@@ -54,7 +54,7 @@ const NoteInput = ({ addNote }) => {
                     onChange={onBodyChangeHandler}
                     required
                 />
-                <button type="submit">{language === 'en' ? "Add note" : "Tambahkan catatan"}</button>
+                <button className="add-button" type="submit">{language === 'en' ? "Add note" : "Tambahkan catatan"}</button>
             </form>
         </div>
     );

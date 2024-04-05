@@ -15,6 +15,12 @@ body {
     color: #333333;
 }
 
+.light h3{
+    background-color: #ffffff;
+    color: #333333;
+    text-decoration: underline;
+}
+
 .light input,
 .light textarea {
     border: 1px solid #ccc;
@@ -35,6 +41,24 @@ body {
     background-color: #e0e0e0;
 }
 
+.light .note-app__header h1 {
+    color: #333333; 
+}
+
+.light .right button {
+    color: #333333; 
+    background-color: #ffffff; 
+}
+
+.light button.add-button {
+    color: #333333; 
+    background-color: #ffffff; 
+}
+
+.light .right button:hover {
+    background-color: #e0e0e0; 
+}
+
 input,
 textarea {
     padding: 12px;
@@ -53,28 +77,41 @@ textarea::placeholder {
 }
 
 .login-page {
-    max-width: 500px;
+    width: 500px;
     margin: 0 auto;
     padding: 20px;
     background-color: #333;
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    height: 100vh; 
 }
 
 .login-page h2 {
     color: white;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .login-page p {
     color: white;
+    text-align: center;
 }
 
 .login-page a {
-    color: #fff263;
+    color: yellowgreen;
+    text-decoration: none;
+}
+.login-page a:hover {
+    color: yellowgreen;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .login-input {
-    max-width: 300px;
+    width: 300px;
     margin: 0 auto;
 }
 
@@ -98,7 +135,7 @@ textarea::placeholder {
 
 .login-input button {
     cursor: pointer;
-    background-color: #fff263;
+    background-color: yellowgreen;
     color: #333;
 }
 
@@ -107,28 +144,41 @@ textarea::placeholder {
 }
 
 .register-page {
-    max-width: 500px;
+    width: 500px;
     margin: 0 auto;
     padding: 20px;
     background-color: #333;
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    height: 100vh; 
 }
 
 .register-page h2 {
     color: white;
     margin-bottom: 20px;
+    text-align: center; 
 }
 
 .register-page p {
     color: white;
+    text-align: center; 
 }
 
 .register-page a {
-    color: #fff263;
+    color: yellowgreen;
+    text-decoration: none;
+}
+.register-page a:hover {
+    color: yellowgreen;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .register-input {
-    max-width: 300px;
+    width: 300px;
     margin: 0 auto;
 }
 
@@ -154,12 +204,18 @@ textarea::placeholder {
 
 .register-input button {
     cursor: pointer;
-    background-color: #fff263;
+    background-color: yellowgreen;
     color: #333;
 }
 
 .register-input button:hover {
     font-weight: bold;
+}
+
+.note-app__body.light {
+    background-color: #ffffff;
+    color: #333333;
+    height: 100vh;
 }
 
 .note-app__header {
@@ -179,6 +235,7 @@ textarea::placeholder {
     max-width: 1000px;
     margin: 16px auto;
     padding: 12px;
+    height: 100vh;
 }
 
 .note-app__body h2 {
@@ -296,7 +353,7 @@ textarea::placeholder {
 }
 
 .note-item__archive-button {
-    color: #fff263;
+    color: yellowgreen;
 }
 
 .note-item__archive-button:hover {
@@ -316,37 +373,37 @@ textarea::placeholder {
 
 .navbar {
     display: flex;
-    justify-content: center;
-    padding: 1rem 0;
-    flex: 1; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 10px 20px; 
 }
 
 .navbar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
+    list-style: none; 
+    display: flex; 
+    align-items: center;
 }
 
-.navbar li {
-    margin-right: 1rem;
+.navbar .right {
+    margin-left: 350px;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
 }
 
-.navbar a {
-    color: #fff;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    transition: background-color 0.3s ease;
+.navbar a,
+.navbar button {
+    color: white; 
+    text-decoration: none; 
+    padding: 10px 15px; 
+    border: none; 
+    background: none; 
+    cursor: pointer;
 }
 
-.navbar a:hover {
-    background-color: #555;
-}
-
-@media only screen and (min-width: 500px) {
-    .notes-list {
-        grid-template-columns: 1fr 1fr;
-    }
+.navbar a:hover,
+.navbar button:hover {
+    background-color: #555; 
 }
 
 .loading-container {

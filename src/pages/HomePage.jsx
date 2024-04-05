@@ -71,7 +71,7 @@ const HomePage = () => {
 
   return (
     <div className="note-app">
-      <div className="note-app__body">
+      <div className={`note-app__body ${theme === 'light' && 'light'}`}>
         <SearchBar
           keyword={keyword}
           keywordChange={onKeywordChangeHandler}

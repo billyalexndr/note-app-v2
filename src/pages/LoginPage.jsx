@@ -17,7 +17,7 @@ const LoginPage = ({ loginSuccess }) => {
         <section className="login-page">
             <h2>Silahkan masuk untuk melanjutkan...</h2>
             <LoginInput login={onLogin} />
-            <p>Belum punya akun? <Link to="/register">Daftar di sini.</Link></p>
+            <p>Belum punya akun? <Link to="/register">Daftar di sini</Link></p>
         </section>
     )
 }

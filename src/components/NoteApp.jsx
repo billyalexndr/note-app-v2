@@ -41,16 +41,16 @@ const NoteApp = () => {
     }
 
     return(
-            <div className="note-app">
+            <div className={`note-app ${theme === 'light' && 'light'}`}>
                 <header>
                     {authedUser && (
-                        <div className="note-app__header">
+                        <div className={`note-app__header ${theme === 'light' && 'light'}`}>
                             <h1>{language === 'en' ? 'Notes' : 'Catatan'}</h1>
                             <Navigation isLoggedIn={true} logout={logout} name={authedUser.name} />
                         </div>
                     )}
                 </header>
-                <main>
+                <main className={`${theme === 'light' && 'light'}`}>
                     <Routes>
                         {!authedUser  && (
                             <Route path="/" element={<LoginPage loginSuccess={onLoginSuccess} />} />
@@ -63,6 +63,7 @@ const NoteApp = () => {
                         {authedUser && <Route path="/archive" element={<ArchivePage />} />}
                         {authedUser && <Route path="/note/:id" element={<DetailPage />} />}
                         {authedUser && <Route path="*" element={<NotFoundPage />} />}
+                        {!authedUser && <Route path="*" element={<LoginPage loginSuccess={onLoginSuccess} />}/>}
                     </Routes>
                 </main>
             </div>
