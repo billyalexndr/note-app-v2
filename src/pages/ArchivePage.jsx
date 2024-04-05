@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 import { getArchivedNotes, deleteNote, unarchiveNote } from "../utils/api";
 import { useSearchParams } from 'react-router-dom';
 import NoteList from "../components/NoteList";
-import SearchBarWrapper from "../components/SearchBar";
+import SearchBar from "../components/SearchBar";
 import { useLocale } from "../context/LocaleContext";
 
-const ArchivePage = ({ defaultKeyword, keywordChange }) => {
+const ArchivePage = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
     const [archivedNotes, setArchivedNotes] = useState([]);
-    const [keyword, setKeyword] = useState(defaultKeyword || '');
+    const [keyword, setKeyword] = useState(searchParams.get('keyword') || '');
     const { theme, language } = useLocale();
 
     useEffect(() => {
@@ -24,9 +25,9 @@ const ArchivePage = ({ defaultKeyword, keywordChange }) => {
     }, []); 
 
     const onKeywordChangeHandler = (keyword) => {
-        setKeyword(keyword);
-        keywordChange(keyword);
-    };
+    setKeyword(keyword);
+    setSearchParams({ keyword });
+    }
 
     const handleDeleteNote = async (id) => {
         const { error } = await deleteNote(id);
@@ -59,7 +60,7 @@ const ArchivePage = ({ defaultKeyword, keywordChange }) => {
     return (
         <div className="note-app">
             <div className="note-app__body">
-                <SearchBarWrapper
+                <SearchBar
                     keyword={keyword}
                     keywordChange={onKeywordChangeHandler}
                 />
