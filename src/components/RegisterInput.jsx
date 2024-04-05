@@ -21,11 +21,11 @@ const RegisterInput = ({ register }) => {
     return (
         <form onSubmit={onSubmitHandler} className='register-input'>
             {errorMessage && <div className="error-message">{errorMessage}</div>}
-            <input type="text" placeholder="Nama" value={name} onChange={setName} />
+            <input type="text" placeholder="Name" value={name} onChange={setName} />
             <input type="email" placeholder="Email" value={email} onChange={setEmail} />
             <input type="password" placeholder="Password" autoComplete='current-password' value={password} onChange={setPassword} />
             <input type="password" placeholder="Confirm Password" autoComplete='current-password' value={confirmPassword} onChange={setConfirmPassword} />
-            <button>Register</button>
+            <button>Daftar</button>
         </form>
     );
 }
